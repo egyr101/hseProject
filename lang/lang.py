@@ -72,7 +72,7 @@ def changeMark(data : dict, id : str, mark : bool):
         }}
 
     return text
-
+# 
 def addLang(text : dict, f : str):
     data = json.load(open(f,encoding="utf-8"))
 
