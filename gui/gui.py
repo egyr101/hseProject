@@ -124,7 +124,7 @@ title=all_languages[0][0]
 root = Tk()
 root.title(title)
 root.geometry("1200x720")
-icon = PhotoImage(file ="C:/Users/Sokol/Desktop/pROOOOD/hseProject/gui/icon.png")
+icon = PhotoImage(file ="gui/icon.png")
 root.iconphoto(False, icon)
 root.tk.call('tk', 'scaling', 2.5)
 
@@ -161,9 +161,9 @@ command1=all_languages[0][3]
 command2=all_languages[0][4]
 command3=all_languages[0][5]
 
-menu_icon_plus = PhotoImage(file = 'C:/Users/Sokol/Desktop/pROOOOD/hseProject/gui/Plus.png').subsample(8, 8)
-menu_icon_alpha = PhotoImage(file = 'C:/Users/Sokol/Desktop/pROOOOD/hseProject/gui/Alphabet.png').subsample(8, 8)
-menu_icon_question = PhotoImage(file = 'C:/Users/Sokol/Desktop/pROOOOD/hseProject/gui/Question.png').subsample(25,25 )
+menu_icon_plus = PhotoImage(file = 'gui/Plus.png').subsample(8, 8)
+menu_icon_alpha = PhotoImage(file = 'gui/Alphabet.png').subsample(8, 8)
+menu_icon_question = PhotoImage(file = 'gui/Question.png').subsample(25,25 )
 
 menu.add_command(label=command1, command=show_choice_window, image=menu_icon_alpha, compound='right')
 menu.add_command(label=command2, command=show_newlanguages_window, image=menu_icon_plus, compound='right')
