@@ -1,17 +1,9 @@
-'''Извлечение корней из обычных чисел'''
+'''Извлечение корней из всех чисел'''
+
+
 from decimal import Decimal, getcontext
 
-def is_number(n):
-    if n[0] == '-':
-        if n[1:].isdigit():
-            return True
-        else:
-            return False
-    else:
-        if n.isdigit():
-            return True
-        else:
-            return False
+
 
 def sqrt_real(a, dot):
     """Вычисление корня с точностью dot знаков используя Decimal"""
@@ -32,6 +24,7 @@ def sqrt_real(a, dot):
     # Форматируем вывод с dot знаками
     return format(x, f'.{dot}f')
 
+
 def sqrt_real_analytics(a, dot):
     if a < 0:
         return '±' + str(sqrt_real(a, dot)) + 'i'
@@ -41,16 +34,54 @@ def sqrt_real_analytics(a, dot):
         return '±' + str(sqrt_real(a, dot)) 
 
 
-a = input()
+def sqrt_complex(a, b, dot):
+    r = Decimal(sqrt_real((a**2 + b**2), dot))
+    
+    re = Decimal(a) + r
+    im = Decimal(-a) + r
+
+    getcontext().prec = dot + 10
+
+    re = Decimal(re) / Decimal(2)
+    im = Decimal(im) / Decimal(2)
+
+    re = Decimal(sqrt_real(re, dot))
+    im = Decimal(sqrt_real(im, dot))
+
+    if b < 0:
+        return f'± ({re} - i * {im})'
+    else:
+        return f'± ({re} + i * {im})'
+
+
+def num_type(a, dot):
+    try:
+        n = complex(a)
+        
+        if n.imag == 0:  
+            if n.real == 0:
+                return '0'
+            else:                                              # если мнимая часть числа равна 0
+                return sqrt_real_analytics(n.real, dot)                       # вещественное число
+        else:                                                          # если мнимая часть числа не равна 0
+            return sqrt_complex(n.real, n.imag, dot)                   # комплексное число
+            
+    except ValueError:
+        return 'Error!'
+
+
+
+num = input()
 dot = input()
 
+num = num.replace('i', 'j', -1)     # комплексные числа python пишет с j, а не с i, как делает пользователь
+num = num.replace(' ', '', -1)      # защита от лишних пробелов, выставленных пользователем в комплексном числе
 
-if (not is_number(a)) or (not is_number(dot)):
-    print('Error!')
-else:
-    a = float(a)
-    dot = int(dot)
-    if (dot < 0 or int(dot) != dot):
-        print('Error!')
+if dot.isdigit():                   # вывод результата работы программы в консоль
+    if int(dot) >= 0:
+        dot = int(dot)
+        print(num_type(num, dot))
     else:
-        print(sqrt_real_analytics(a, dot))
+        print('Error!')
+else:
+    print('Error!')
