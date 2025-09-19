@@ -1,6 +1,18 @@
 '''Извлечение корней из обычных чисел'''
 from decimal import Decimal, getcontext
 
+def is_number(n):
+    if n[0] == '-':
+        if n[1:].isdigit():
+            return True
+        else:
+            return False
+    else:
+        if n.isdigit():
+            return True
+        else:
+            return False
+
 def sqrt_real(a, dot):
     """Вычисление корня с точностью dot знаков используя Decimal"""
     # Устанавливаем точность (dot знаков после запятой + запас)
@@ -24,7 +36,7 @@ def sqrt_real_analytics(a, dot):
     if a < 0:
         return '±' + str(sqrt_real(a, dot)) + 'i'
     elif a == 0:
-        return sqrt_real(a, dot)
+        return '0'
     else:
         return '±' + str(sqrt_real(a, dot)) 
 
@@ -32,11 +44,12 @@ def sqrt_real_analytics(a, dot):
 a = input()
 dot = input()
 
-if (not a.isdigit()) or (not dot.isdigit()):
+
+if (not is_number(a)) or (not is_number(dot)):
     print('Error!')
 else:
     a = float(a)
-    dot = float(dot)
+    dot = int(dot)
     if (dot < 0 or int(dot) != dot):
         print('Error!')
     else:
