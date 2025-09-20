@@ -74,8 +74,8 @@ def getJson(f : str):
 
     with open(f, "r", encoding="utf-8") as file:
         data = json.load(file)
-    if not(validationJson(f,data)):
-        return None
+#     if not(validationJson(f,data)):
+#         return None
     return data 
 
 def changeMark(data : dict, id : str, mark : bool):
@@ -116,8 +116,8 @@ def primarySetLang(f : str):
 
     file_json = getJson(refFileJson)
 
-    if not(validationJson(f,file_json)):
-        return None
+    # if not(validationJson(f,file_json)):
+    #     return None
 
     for j in file_json:
         if "A" in j:
@@ -136,8 +136,8 @@ def addLang(text : dict, f : str):
 
     data = getJson(f)
 
-    if not(validationJson(f,data)):
-        return None
+    # if not(validationJson(f,data)):
+    #     return None
     data.update(text)
 
     with open(f,"w", encoding="utf-8") as file:
@@ -150,8 +150,8 @@ def setLang(current_id : str, new_id : str, f : str):
     
     
     data = getJson(f)
-    if not(validationJson(f)):
-        return None,None
+    # if not(validationJson(f)):
+    #     return None,None
 
 
 
