@@ -1,8 +1,7 @@
 '''Извлечение корней из всех чисел'''
-
-
 from decimal import Decimal, getcontext
 
+''' from numba import njit '''
 
 
 def sqrt_real(a, dot):
@@ -15,15 +14,22 @@ def sqrt_real(a, dot):
     
     x = Decimal(a)
     # Метод Ньютона с Decimal
-    for i in range(50):  # Достаточно итераций для сходимости
+    for i in range(1000):  # Достаточно итераций для сходимости
         next_x = (x + Decimal(a) / x) / Decimal(2)
         if next_x == x:
             break
         x = next_x
     
-    # Форматируем вывод с dot знаками
-    return format(x, f'.{dot}f')
-
+    if dot == 0:
+        return round(x, 0)
+    else:
+        # Форматируем вывод с dot знаками
+        result = format(x, f'.{dot + 1}f')
+        if int(result[-1]) >= 5:
+            result = result[:-2] + str(int(result[-2]) + 1)
+        else:
+            result = result[:-1]
+        return result
 
 def sqrt_real_analytics(a, dot):
     if a < 0:
@@ -32,7 +38,6 @@ def sqrt_real_analytics(a, dot):
         return '0'
     else:
         return '±' + str(sqrt_real(a, dot)) 
-
 
 def sqrt_complex(a, b, dot):
     r = Decimal(sqrt_real((a**2 + b**2), dot))
@@ -53,7 +58,6 @@ def sqrt_complex(a, b, dot):
     else:
         return f'± ({re} + i * {im})'
 
-
 def num_type(a, dot):
     try:
         n = complex(a)
@@ -69,15 +73,14 @@ def num_type(a, dot):
     except ValueError:
         return 'Error!'
 
-
-
 num = input()
 dot = input()
 
 num = num.replace('i', 'j', -1)     # комплексные числа python пишет с j, а не с i, как делает пользователь
 num = num.replace(' ', '', -1)      # защита от лишних пробелов, выставленных пользователем в комплексном числе
+num = num.replace(',', '.', -1)     # пайтон не воспринимает вещественные числа с плавающей точкой, если вместо точки использована запятая
 
-if dot.isdigit():                   # вывод результата работы программы в консоль
+if dot.isdigit():
     if int(dot) >= 0:
         dot = int(dot)
         print(num_type(num, dot))
