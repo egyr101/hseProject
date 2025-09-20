@@ -1,5 +1,8 @@
 import json
 import random
+
+refFileJson = "lang/json/languages.json" 
+
 class TextFile:
     def __init__(self, lang_name : str, hello_name : str, input_num_name : str, input_dot_name : str,
                  button_sqrt_name: str, output_res_name : str, settings_name : str, change_lang_name: str,
@@ -19,7 +22,6 @@ class TextFile:
         self.button_save_name = button_save_name
     def changeId(self):
         self.id = id * 10
-refFileJson = "lang/json/languages.json"
 
 def createJson(text_file : TextFile):
     text = {text_file.id : {
@@ -72,21 +74,33 @@ def changeMark(data : dict, id : str, mark : bool):
         }}
 
     return text
-# 
-def addLang(text : dict, f : str):
-    data = json.load(open(f,encoding="utf-8"))
 
+def primarySetLang(f : str):
+
+    file_json = getJson(refFileJson)
+
+    for j in file_json:
+        if "A" in j:
+            text = file_json[j]
+            text_file = TextFile(text["lang_name"],text["hello_name"], text["input_num_name"],
+                                text["input_dot_name"], text["button_sqrt_name"], text["output_res_name"],
+                                text["settings_name"], text["change_lang_name"], text["add_lang_name"],
+                                text["feedback_name"], text["readme_name"], text["button_save_name"] )
+            break
+    return text_file
+
+
+def addLang(text : dict, f : str):
+
+    data = getJson(f)
     data.update(text)
+
     with open(f,"w", encoding="utf-8") as file:
         json.dump(data,file,indent=3,ensure_ascii=False)
 
 def setLang(current_id : str, new_id : str, f : str):
-    data_current = {}
-    data_new = {}
 
-    with open(f,"r",encoding="utf-8") as file:
-
-        data = json.load(file)
+    data = getJson(f)
 
     with open(f, "w", encoding="utf-8") as file:
 
@@ -98,6 +112,13 @@ def setLang(current_id : str, new_id : str, f : str):
 
         json.dump(data, file, indent=3, ensure_ascii=False)
         data = data[f"A{new_id}"]
+
     return f"A{new_id}", TextFile(data["lang_name"], data["hello_name"], data["input_num_name"], data["input_dot_name"],
                         data["button_sqrt_name"], data["output_res_name"], data["settings_name"], data["change_lang_name"],
                         data["add_lang_name"], data["feedback_name"], data["readme_name"], data["button_save_name"])
+
+def validationId(data : dict, text_file_input : TextFile, f : str ):
+    for j in data:
+        if text_file_input.id == j:
+            text_file_input.changeId()
+            break
