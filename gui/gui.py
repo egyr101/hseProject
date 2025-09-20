@@ -6,7 +6,17 @@ import random
 import logic.logic as lg
 flag=0
 
-text_file = l.primarySetLang(l.refFileJson)
+def json_error():
+    error=Toplevel(root)
+    error.title("Error")
+    error.geometry("800x290")
+    error.configure(bg='red')
+    ttk.Label(error, text='Json error,plese,restart the program',background='red', foreground='white', font=('Segoe UI', 16, 'bold')).place(relx=0.5, rely=0.5, anchor='center')
+    error.after(4000, root.destroy)
+
+check, text_file = l.primarySetLang(l.refFileJson)
+if check == False:
+    json_error()
 
 ctypes.windll.shcore.SetProcessDpiAwareness(1)
 
@@ -30,7 +40,6 @@ def show_input_error():   #вызов окна ошибки
     ttk.Label(err, textvariable=error_text,background='red', foreground='white', font=('Segoe UI', 16, 'bold')).place(relx=0.5, rely=0.5, anchor='center')
     err.after(3000, err.destroy)
 
-
 def show_choice_window(): #Окно с изменением языка
     
     win = Toplevel(root)
@@ -41,13 +50,21 @@ def show_choice_window(): #Окно с изменением языка
     def radiobuttonReturn(textFile,current_language_id,new_language_id):
         global menu
         print(text_file, current_language_id, new_language_id)
-        if l.setLang(textFile, current_language_id, new_language_id, l.refFileJson):
+        check = l.setLang(textFile, current_language_id, new_language_id, l.refFileJson)
+        if not(check):
+            json_error()
+        if check != "no change":
             text_file.setTextFile(new_language_id,text_file.createJson()[text_file.id])
             setText(text_file, menu)
         win.after(1000, win.destroy)
-
-    for d in l.getJson(l.refFileJson):
-        ttk.Radiobutton(win, text=l.getJson(l.refFileJson)[d]["lang_name"], value=d, 
+    check, data = l.getJson(l.refFileJson)
+    if not(check):
+        json_error()
+    for d in data:
+        check, t = l.getJson(l.refFileJson)
+        if check == False:
+            json_error()
+        ttk.Radiobutton(win, text=t[d]["lang_name"], value=d, 
                        command=lambda id=d: radiobuttonReturn(text_file,text_file.id,id), 
                        style='Dark.TRadiobutton').pack(anchor='w', padx=22, pady=(22,11))
 
@@ -140,7 +157,8 @@ def show_newlanguages_window(): #Окно с добавлением языка
                 "readme_name" : error_text_input,
                 "button_save_name" : save_text_input
             }}
-            l.addLang(t,l.refFileJson)
+            if not(l.addLang(t,l.refFileJson)):
+                json_error()
             add_language.after(1000, add_language.destroy)
         
     save_btn = ttk.Button(add_language, textvariable=save_text, style='Dark.TButton', command=_save_new_language)
@@ -215,11 +233,10 @@ BBG='#5a189a' #Чуть светлее бэка для заливки полей
 FULLBG='#10002b' #самый темный
 initStyles(BG,FG,BBG,FULLBG)
 
-frame = Frame(root, highlightthickness=2, highlightbackground=FULLBG, bg=BG)
-frame.place(relx=0.83, y=13)
-menu_button = ttk.Menubutton(frame, textvariable=settings_text, style='Dark.TMenubutton')
-menu_button.pack()
-menu = Menu(menu_button, tearoff=0, bg=BG, fg=FG, activebackground=BBG, activeforeground=FG)
+
+menu_button = ttk.Menubutton(root, textvariable=settings_text, style='Dark.TMenubutton')
+menu_button.pack(anchor='ne')
+menu = Menu(menu_button, tearoff=0, bg=BG, fg=FG, activebackground=BBG, activeforeground=FG, relief='flat', bd=0)
 menu.configure(font=('Segoe UI', 16))
 menu_button['menu'] = menu
 
@@ -228,6 +245,7 @@ setText(text_file, menu)
 
 root.title(title)
 root.geometry("1200x720")
+root.resizable(False, True)
 root.tk.call('tk', 'scaling', 2.5)
 
 
@@ -251,7 +269,7 @@ button.place(relx=0.5, y=360, anchor='center')
 
 frame_output = Frame(root, highlightthickness=3, highlightbackground=FULLBG, background=BG)
 frame_output.place(x=3, y=430, relwidth=1, width=-10)
-output_label = ttk.Label(frame_output, textvariable=output_var, wraplength=1000, style='Dark.TLabel')
+output_label = ttk.Label(frame_output, textvariable=output_var, wraplength=1150, style='Dark.TLabel')
 output_label.pack(fill='both', expand=True, padx=30)
 
 root.mainloop()
