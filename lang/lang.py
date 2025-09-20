@@ -50,8 +50,20 @@ class TextFile:
                 self.changeId()
                 break
     
-    def setTextFile(self, currentTextFile):
-        self.lang_name = currentTextFile.lang_name
+    def setTextFile(self, id, text : dict):
+        self.id = id
+        self.lang_name = text["lang_name"]
+        self.hello_name = text["hello_name"]
+        self.input_num_name = text["input_num_name"]
+        self.input_dot_name = text["input_dot_name"]
+        self.button_sqrt_name = text["button_sqrt_name"]
+        self.output_res_name = text["output_res_name"]
+        self.settings_name = text["settings_name"]
+        self.change_lang_name = text["change_lang_name"]
+        self.add_lang_name = text["add_lang_name"]
+        self.feedback_name = text["feedback_name"]
+        self.readme_name = text["readme_name"]
+        self.button_save_name = text["button_save_name"]
 
 
 def validationJson(f, data):
@@ -83,7 +95,7 @@ def getJson(f : str):
     return data 
 
 def changeMark(data : dict, id : str, mark : bool):
-
+    print(1)
     selected = data.pop(id)
 
     if (("A" in id and mark) or ("A" not in id and (not(mark)))):
@@ -111,7 +123,7 @@ def changeMark(data : dict, id : str, mark : bool):
             "readme_name" : selected["readme_name"],
             "button_save_name" : selected["button_save_name"]
         }}
-
+    print(mark_name+common_id)
     return text
 
 def primarySetLang(f : str):
@@ -150,10 +162,10 @@ def addLang(text : dict, f : str):
         json.dump(data,file,indent=3,ensure_ascii=False)
 
 def setLang(textFile : TextFile, current_id : str, new_id : str, f : str):
-
-    if ("A" in current_id + "A" in new_id) != 1:
-        return None
     
+    if (int("A" in current_id) + int("A" in new_id)) != 1:
+        print("A" in current_id + "A" in new_id)
+        return None
     
     data = getJson(f)
     # if not(validationJson(f)):
@@ -177,20 +189,7 @@ def setLang(textFile : TextFile, current_id : str, new_id : str, f : str):
 
         json.dump(data, file, indent=3, ensure_ascii=False)
         data = data[f"A{new_id}"]
-        textFile.id = new_id
-        textFile.lang_name = data["lang_name"]
-        textFile.hello_name = data["hello_name"]
-        textFile.input_num_name = data["input_num_name"]
-        textFile.input_dot_name = data["input_dot_name"]
-        textFile.button_sqrt_name = data["button_sqrt_name"]
-        textFile.output_res_name = data["output_res_name"]
-
-        textFile.settings_name = data["settings_name"]
-        textFile.change_lang_name = data["change_lang_name"]
-        textFile.add_lang_name = data["add_lang_name"]
-        textFile.feedback_name = data["feedback_name"]
-        textFile.readme_name = data["readme_name"]
-        textFile.button_save_name = data["button_save_name"]
+        textFile.setTextFile(f"A{new_id}",data)
     # return f"A{new_id}", TextFile(data["lang_name"], data["hello_name"], data["input_num_name"], data["input_dot_name"],
     #                     data["button_sqrt_name"], data["output_res_name"], data["settings_name"], data["change_lang_name"],
     #                     data["add_lang_name"], data["feedback_name"], data["readme_name"], data["button_save_name"])

@@ -1,6 +1,6 @@
 #гугл форма
 import lang.lang as l
-import gui.gui as g
+# import gui.gui as g
 
 
 # text1,text2,text3 = "aaasdaaрфыврфsd","dsssfdsfs","aaasdыфовфрaasd"
@@ -31,7 +31,10 @@ import gui.gui as g
 # text_file_input.validationId(data, l.refFileJson)
 
 # l.addLang(text_file_input.createJson(),l.refFileJson)
+# print(text_file.id)
+# l.setLang(text_file,text_file.id,"2511719659",l.refFileJson)
 
-# id, data = l.setLang("A6211702782", "2511719659", l.refFileJson)
+# text_file.setTextFile("2511719659",text_file.createJson()[text_file.id])
+# print(text_file.id)
 
 # print(data.lang_name, data.hello_name)
