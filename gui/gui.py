@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import ctypes
 import lang.lang as l
+flag=0
 
 text_file = l.primarySetLang(l.refFileJson)
 
@@ -35,10 +36,11 @@ def show_choice_window(): #Окно с изменением языка
     win.configure(bg=BG)
 
     def radiobuttonReturn(textFile,current_language_id,new_language_id):
+        global menu
         print(text_file, current_language_id, new_language_id)
         if l.setLang(textFile, current_language_id, new_language_id, l.refFileJson):
             text_file.setTextFile(new_language_id,text_file.createJson()[text_file.id])
-            setText(text_file)
+            setText(text_file, menu)
         win.after(1000, win.destroy)
 
     for d in l.getJson(l.refFileJson):
@@ -50,42 +52,77 @@ def show_choice_window(): #Окно с изменением языка
 def show_newlanguages_window(): #Окно с добавлением языка 
     add_language = Toplevel(root)
     add_language.title(command2.get())
-    add_language.geometry("720x450")
+    add_language.geometry("1000x1000")
     add_language.configure(bg=BG)
     
-    # Поля ввода для нового языка
-    vFirst = StringVar()
-    vSecond = StringVar()
-    vThird = StringVar()
-    vFourth = StringVar()
+
     
-    ttk.Label(add_language, text="Название языка", style='Dark.TLabel').place(x=30, y=30)
-    e_title = ttk.Entry(add_language, textvariable=vFirst, style='Dark.TEntry')
-    e_title.place(x=30, y=60, width=420, height=36)
+    ttk.Label(add_language, textvariable=language_name, style='Dark.TLabel').place(x=30, y=30)
+    e_language_name = ttk.Entry(add_language, style='Dark.TEntry')
+    e_language_name.place(x=30, y=60, width=620, height=36)
 
-    ttk.Label(add_language, text="Текст приветствия", style='Dark.TLabel').place(x=30, y=110)
-    e_welcome = ttk.Entry(add_language, textvariable=vSecond, style='Dark.TEntry')
-    e_welcome.place(x=30, y=140, width=420, height=36)
+    ttk.Label(add_language, textvariable=title_on_screen, style='Dark.TLabel').place(x=30, y=110)
+    e_title_on_screen = ttk.Entry(add_language, style='Dark.TEntry')
+    e_title_on_screen.place(x=30, y=140, width=620, height=36)
 
-    ttk.Label(add_language, text="Подпись настроек", style='Dark.TLabel').place(x=30, y=190)
-    e_settings = ttk.Entry(add_language, textvariable=vThird, style='Dark.TEntry')
-    e_settings.place(x=30, y=220, width=420, height=36)
+    ttk.Label(add_language, textvariable=input_num, style='Dark.TLabel').place(x=30, y=190)
+    e_input_num = ttk.Entry(add_language, style='Dark.TEntry')
+    e_input_num.place(x=30, y=220, width=620, height=36)
 
-    ttk.Label(add_language, text="Текст кнопки", style='Dark.TLabel').place(x=30, y=270)
-    e_button = ttk.Entry(add_language, textvariable=vFourth, style='Dark.TEntry')
-    e_button.place(x=30, y=300, width=420, height=36)
+    ttk.Label(add_language, textvariable=input_dot, style='Dark.TLabel').place(x=30, y=270)
+    e_input_dot = ttk.Entry(add_language, style='Dark.TEntry')
+    e_input_dot.place(x=30, y=300, width=620, height=36)
+
+    ttk.Label(add_language, textvariable=button_text, style='Dark.TLabel').place(x=30, y=350)
+    e_button_text = ttk.Entry(add_language, style='Dark.TEntry')
+    e_button_text.place(x=30, y=380, width=620, height=36)
+
+    ttk.Label(add_language, textvariable=output_var, style='Dark.TLabel').place(x=30, y=430)
+    e_output_var = ttk.Entry(add_language, style='Dark.TEntry')
+    e_output_var.place(x=30, y=460, width=620, height=36)
+
+    ttk.Label(add_language, textvariable=settings_text, style='Dark.TLabel').place(x=30, y=510)
+    e_settings_text = ttk.Entry(add_language, style='Dark.TEntry')
+    e_settings_text.place(x=30, y=540, width=620, height=36)
+
+    ttk.Label(add_language, textvariable=error_text, style='Dark.TLabel').place(x=30, y=590)
+    e_error_text = ttk.Entry(add_language, style='Dark.TEntry')
+    e_error_text.place(x=30, y=620, width=620, height=36)
+
+    ttk.Label(add_language, textvariable=command1, style='Dark.TLabel').place(x=30, y=670)
+    e_command1 = ttk.Entry(add_language, style='Dark.TEntry')
+    e_command1.place(x=30, y=700, width=620, height=36)
+
+    ttk.Label(add_language, textvariable=command2, style='Dark.TLabel').place(x=30, y=750)
+    e_command2 = ttk.Entry(add_language, style='Dark.TEntry')
+    e_command2.place(x=30, y=780, width=620, height=36)
+
+    ttk.Label(add_language,textvariable=command3, style='Dark.TLabel').place(x=30, y=830)
+    e_command3 = ttk.Entry(add_language, style='Dark.TEntry')
+    e_command3.place(x=30, y=860, width=620, height=36)
+
+    ttk.Label(add_language,textvariable=save_text, style='Dark.TLabel').place(x=30, y=910)
+    e_save_text = ttk.Entry(add_language, style='Dark.TEntry')
+    e_save_text.place(x=30, y=940, width=620, height=36)
+
 
     def _save_new_language(): 
-        global new_vFirst, new_vSecond, new_vThird, new_vFourth
-        new_vFirst = vFirst.get()
-        new_vSecond = vSecond.get()
-        new_vThird = vThird.get()
-        new_vFourth = vFourth.get()
+        language_name_input = e_language_name.get()
+        title_on_screen_input = e_title_on_screen.get()
+        input_num_input = e_input_num.get()
+        input_dot_input = e_input_dot.get()
+        button_text_input = e_button_text.get()
+        output_var_input = e_output_var.get()
+        settings_text_input = e_settings_text.get()
+        error_text_input = e_error_text.get()
+        command1_input = e_command1.get()
+        command2_input = e_command2.get()
+        command3_input = e_command3.get()
+        save_text_input = e_save_text.get()
         
-        add_language.destroy()
         
     save_btn = ttk.Button(add_language, textvariable=save_text, style='Dark.TButton', command=_save_new_language)
-    save_btn.place(x=500, y=120, width=170, height=60)
+    save_btn.place(x=800, y=120, width=170, height=60)
 
 
 def initStyles(BG,FG,BBG,FULLBG):
@@ -103,7 +140,9 @@ def initStyles(BG,FG,BBG,FULLBG):
     style.configure('Dark.TRadiobutton', background=BG, foreground=FG)
     style.map('Dark.TRadiobutton', background=[('active', FULLBG), ('pressed', FULLBG)])
 
-def setText (text_file : l.TextFile):
+def setText (text_file : l.TextFile, menu_obj: Menu):
+    global flag
+    language_name.set(text_file.lang_name)
     title_on_screen.set(text_file.hello_name)
     settings_text.set(text_file.settings_name)
     output_var.set(text_file.output_res_name)
@@ -115,11 +154,24 @@ def setText (text_file : l.TextFile):
     command1.set(text_file.change_lang_name)
     command2.set(text_file.add_lang_name)
     command3.set(text_file.feedback_name)
+    
+    
+    if flag:
+        menu_obj.delete(0)
+        menu_obj.delete(0)
+        menu_obj.delete(0)
+
+    flag=1
+    menu_obj.add_command(label=text_file.change_lang_name, command=show_choice_window)
+    menu_obj.add_command(label=text_file.add_lang_name, command=show_newlanguages_window)
+    menu_obj.add_command(label=text_file.feedback_name)
+
 
 
 title='Root Calculator'
 root = Tk()
 #Все переменные для языка
+language_name = StringVar()
 title_on_screen = StringVar()
 settings_text = StringVar()
 output_var = StringVar()
@@ -132,13 +184,7 @@ number = StringVar()
 accuracy = StringVar() 
 command1=StringVar() 
 command2=StringVar() 
-command3=StringVar() 
-
-setText(text_file)
-
-root.title(title)
-root.geometry("1200x720")
-root.tk.call('tk', 'scaling', 2.5)
+command3=StringVar()
 
 #Стили для кода
 BG = '#240046' #основной бэк
@@ -147,17 +193,8 @@ BBG='#5a189a' #Чуть светлее бэка для заливки полей
 FULLBG='#10002b' #самый темный
 initStyles(BG,FG,BBG,FULLBG)
 
-
-
-title_label = ttk.Label(root, textvariable=title_on_screen, style='Title.TLabel')
-title_label.place(relx=0.15, y=100)
-
-
-
-#Настройки
 frame = Frame(root, highlightthickness=2, highlightbackground=FULLBG, bg=BG)
 frame.place(relx=0.83, y=13)
-
 menu_button = ttk.Menubutton(frame, textvariable=settings_text, style='Dark.TMenubutton')
 menu_button.pack()
 menu = Menu(menu_button, tearoff=0, bg=BG, fg=FG, activebackground=BBG, activeforeground=FG)
@@ -165,10 +202,20 @@ menu.configure(font=('Segoe UI', 16))
 menu_button['menu'] = menu
 
 
+setText(text_file, menu)
 
-menu.add_command(label=command1.get(), command=show_choice_window)
-menu.add_command(label=command2.get(), command=show_newlanguages_window)
-menu.add_command(label=command3.get())
+root.title(title)
+root.geometry("1200x720")
+root.tk.call('tk', 'scaling', 2.5)
+
+
+title_label = ttk.Label(root, textvariable=title_on_screen, style='Title.TLabel')
+title_label.place(relx=0.15, y=100)
+
+
+
+# Обновляем меню с правильными текстами
+
 
 #Для нового языка
 new_vFirst = ""
