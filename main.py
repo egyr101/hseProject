@@ -26,9 +26,9 @@ for j in data:
 
 text_file_input = l.TextFile(lang_name, text2, text3, text4, text5, text6, text7, text8, text9, text10, text11, text12)
 
-l.validationId(data, text_file_input, l.refFileJson)
+text_file_input.validationId(data, l.refFileJson)
 
-l.addLang(l.createJson(text_file_input),l.refFileJson)
+l.addLang(text_file_input.createJson(),l.refFileJson)
 
 # id, data = l.setLang("A6211702782", "2511719659", l.refFileJson)
 
