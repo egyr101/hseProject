@@ -50,11 +50,11 @@ class TextFile:
                 self.changeId()
                 break
 
-def validationJson(f):
+def validationJson(f, data):
 
     checkLenElem = False
 
-    for j in getJson(f):
+    for j in data:
 
         try:
             checkLenElem = False
@@ -72,11 +72,10 @@ def validationJson(f):
 
 def getJson(f : str):
 
-    if not(validationJson(f)):
-        return None
-
     with open(f, "r", encoding="utf-8") as file:
         data = json.load(file)
+    if not(validationJson(f,data)):
+        return None
     return data 
 
 def changeMark(data : dict, id : str, mark : bool):
@@ -113,10 +112,12 @@ def changeMark(data : dict, id : str, mark : bool):
 
 def primarySetLang(f : str):
 
-    if not(validationJson(f)):
-        return None
+    
 
     file_json = getJson(refFileJson)
+
+    if not(validationJson(f,file_json)):
+        return None
 
     for j in file_json:
         if "A" in j:
@@ -131,10 +132,12 @@ def primarySetLang(f : str):
 
 def addLang(text : dict, f : str):
 
-    if not(validationJson(f)):
-        return None
+    
 
     data = getJson(f)
+
+    if not(validationJson(f,data)):
+        return None
     data.update(text)
 
     with open(f,"w", encoding="utf-8") as file:
@@ -145,10 +148,12 @@ def setLang(current_id : str, new_id : str, f : str):
     if ("A" in current_id + "A" in new_id) != 1:
         return None, None
     
+    
+    data = getJson(f)
     if not(validationJson(f)):
         return None,None
 
-    data = getJson(f)
+
 
     with open(f, "w", encoding="utf-8") as file:
 
