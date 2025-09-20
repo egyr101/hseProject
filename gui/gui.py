@@ -33,7 +33,7 @@ def show_choice_window(): #Окно с изменением языка
     
     win = Toplevel(root)
     win.title(command1.get())
-    win.geometry("500x290")
+    win.geometry("500x800")
     win.configure(bg=BG)
 
     def radiobuttonReturn(textFile,current_language_id,new_language_id):
@@ -120,21 +120,26 @@ def show_newlanguages_window(): #Окно с добавлением языка
         command2_input = e_command2.get()
         command3_input = e_command3.get()
         save_text_input = e_save_text.get()
-        t = {str(random.randint(1000000000,9999999999)) : {
-            "lang_name" : language_name_input,
-            "hello_name" : title_on_screen_input, 
-            "input_num_name" : input_num_input,
-            "input_dot_name" : input_dot_input,
-            "button_sqrt_name" : button_text_input,
-            "output_res_name" : output_var_input,
-            "settings_name" : settings_text_input,
-            "change_lang_name" : command1_input, 
-            "add_lang_name" : command2_input,
-            "feedback_name" : command3_input,
-            "readme_name" : error_text_input,
-            "button_save_name" : save_text_input
-        }}
-        l.addLang(t,l.refFileJson)
+        if language_name_input == "" or title_on_screen_input == "" or input_num_input == "" or input_dot_input == "" or button_text_input == "" or output_var_input == "" or settings_text_input == "" or error_text_input == "" or command1_input == "" or command2_input == "" or command3_input == "" or save_text_input == "":
+            show_input_error()
+            return
+        else:
+            t = {str(random.randint(1000000000,9999999999)) : {
+                "lang_name" : language_name_input,
+                "hello_name" : title_on_screen_input, 
+                "input_num_name" : input_num_input,
+                "input_dot_name" : input_dot_input,
+                "button_sqrt_name" : button_text_input,
+                "output_res_name" : output_var_input,
+                "settings_name" : settings_text_input,
+                "change_lang_name" : command1_input, 
+                "add_lang_name" : command2_input,
+                "feedback_name" : command3_input,
+                "readme_name" : error_text_input,
+                "button_save_name" : save_text_input
+            }}
+            l.addLang(t,l.refFileJson)
+            add_language.after(1000, add_language.destroy)
         
     save_btn = ttk.Button(add_language, textvariable=save_text, style='Dark.TButton', command=_save_new_language)
     save_btn.place(x=800, y=120, width=170, height=60)
