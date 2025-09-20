@@ -3,7 +3,6 @@ from tkinter import ttk
 import ctypes
 import lang.lang as l
 
-data = l.getJson(l.refFileJson)
 text_file = l.primarySetLang(l.refFileJson)
 
 ctypes.windll.shcore.SetProcessDpiAwareness(1)
@@ -36,13 +35,14 @@ def show_choice_window(): #Окно с изменением языка
     win.configure(bg=BG)
 
     def radiobuttonReturn(textFile,current_language_id,new_language_id):
-        l.setLang(textFile, current_language_id, new_language_id, l.refFileJson)
-        text_file.setTextFile(new_language_id,text_file.createJson()[text_file.id])
-        setText(text_file)
+        print(text_file, current_language_id, new_language_id)
+        if l.setLang(textFile, current_language_id, new_language_id, l.refFileJson):
+            text_file.setTextFile(new_language_id,text_file.createJson()[text_file.id])
+            setText(text_file)
         win.after(1000, win.destroy)
 
-    for d in data:
-        ttk.Radiobutton(win, text=data[d]["lang_name"], value=d, 
+    for d in l.getJson(l.refFileJson):
+        ttk.Radiobutton(win, text=l.getJson(l.refFileJson)[d]["lang_name"], value=d, 
                        command=lambda id=d: radiobuttonReturn(text_file,text_file.id,id), 
                        style='Dark.TRadiobutton').pack(anchor='w', padx=22, pady=(22,11))
 

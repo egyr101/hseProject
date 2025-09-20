@@ -33,8 +33,14 @@ import gui.gui as g
 # l.addLang(text_file_input.createJson(),l.refFileJson)
 # print(text_file.id)
 # l.setLang(text_file,text_file.id,"2511719659",l.refFileJson)
-
+# print(text_file.id)
 # text_file.setTextFile("2511719659",text_file.createJson()[text_file.id])
+# print(text_file.id)
+
+# print(text_file.id)
+# l.setLang(text_file,text_file.id,"6211702782",l.refFileJson)
+
+# text_file.setTextFile("6211702782",text_file.createJson()[text_file.id])
 # print(text_file.id)
 
 # print(data.lang_name, data.hello_name)

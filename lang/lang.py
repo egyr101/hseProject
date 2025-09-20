@@ -51,7 +51,7 @@ class TextFile:
                 break
     
     def setTextFile(self, id, text : dict):
-        self.id = id
+        self.id = f"A{id}"
         self.lang_name = text["lang_name"]
         self.hello_name = text["hello_name"]
         self.input_num_name = text["input_num_name"]
@@ -95,18 +95,21 @@ def getJson(f : str):
     return data 
 
 def changeMark(data : dict, id : str, mark : bool):
+
     selected = data.pop(id)
 
     if (("A" in id and mark) or ("A" not in id and (not(mark)))):
         return None
+    
     common_id = id
+
+    if "A" in id:
+        common_id = common_id[1:]
 
     mark_name = ""
 
     if (mark):
         mark_name = "A"
-    else:
-        common_id = id[1:]
     
     text = {f"{mark_name}{common_id}" :  {
             "lang_name" : selected["lang_name"],
@@ -161,33 +164,36 @@ def addLang(text : dict, f : str):
 
 def setLang(textFile : TextFile, current_id : str, new_id : str, f : str):
 
-    if (int("A" in current_id) + int("A" in new_id)) != 1:
-        print("A" in current_id + "A" in new_id)
-        return None
-    
-    data = getJson(f)
-    # if not(validationJson(f)):
-    #     return None,None
-
-
-
-    with open(f, "w", encoding="utf-8") as file:
-
-        text = changeMark(data, current_id, False)
-        if text == None:
-            return None
+    if (current_id == new_id):
+        return False
+    else:
+        if (int("A" in current_id) + int("A" in new_id)) != 1:
+            return False
         
-        data.update(text)
+        data = getJson(f)
+        # if not(validationJson(f)):
+        #     return None,None
 
-        text = changeMark(data, new_id, True)
-        if text == None:
-            return None
-        
-        data.update(text)
 
-        json.dump(data, file, indent=3, ensure_ascii=False)
-        data = data[f"A{new_id}"]
-        textFile.setTextFile(f"A{new_id}",data)
+
+        with open(f, "w", encoding="utf-8") as file:
+
+            text = changeMark(data, current_id, False)
+            if text == None:
+                return None
+            
+            data.update(text)
+
+            text = changeMark(data, new_id, True)
+            if text == None:
+                return None
+            
+            data.update(text)
+
+            json.dump(data, file, indent=3, ensure_ascii=False)
+            data = data[f"A{new_id}"]
+            textFile.setTextFile(f"{new_id}",data)
+        return True
     # return f"A{new_id}", TextFile(data["lang_name"], data["hello_name"], data["input_num_name"], data["input_dot_name"],
     #                     data["button_sqrt_name"], data["output_res_name"], data["settings_name"], data["change_lang_name"],
     #                     data["add_lang_name"], data["feedback_name"], data["readme_name"], data["button_save_name"])
