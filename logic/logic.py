@@ -74,7 +74,7 @@ def num_type(a, dot):
             
     except ValueError:
         g.show_input_error()
-        return 
+        return 'error'
 
 def answer(a,dot):
     a = a.replace('i', 'j', -1)
@@ -87,9 +87,9 @@ def answer(a,dot):
             return num_type(a, dot)
         else:
             g.show_input_error()
-            return
+            return 'error'
     elif dot=='':
         return num_type(a, 5)
     else:
         g.show_input_error()
-        return
+        return 'error'

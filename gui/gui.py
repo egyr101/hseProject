@@ -15,7 +15,7 @@ def on_show_text():  #работа с введенными числами
     first_value = entry1.get()
     second_value = entry2.get()
     output_var.set(lg.answer(first_value, second_value))
-    if output_var.get() == '':
+    if output_var.get() == 'error':
         output_var.set(text_file.readme_name)
     entry1.delete(0, END)
     entry2.delete(0, END)
