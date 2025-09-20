@@ -86,6 +86,7 @@ def show_newlanguages_window(): #Окно с добавлением языка
     save_btn = ttk.Button(add_language, textvariable=save_text, style='Dark.TButton', command=_save_new_language)
     save_btn.place(x=500, y=120, width=170, height=60)
 
+
 def initStyles(BG,FG,BBG,FULLBG):
     style = ttk.Style()
     style.theme_use('clam')
