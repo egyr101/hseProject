@@ -152,7 +152,7 @@ def addLang(text : dict, f : str):
 def setLang(textFile : TextFile, current_id : str, new_id : str, f : str):
 
     if ("A" in current_id + "A" in new_id) != 1:
-        return None, None
+        return None
     
     
     data = getJson(f)
@@ -177,20 +177,20 @@ def setLang(textFile : TextFile, current_id : str, new_id : str, f : str):
 
         json.dump(data, file, indent=3, ensure_ascii=False)
         data = data[f"A{new_id}"]
-    textFile.id = new_id
-    textFile.lang_name = data["lang_name"]
-    textFile.hello_name = data["hello_name"]
-    textFile.input_num_name = data["input_num_name"]
-    textFile.input_dot_name = data["input_dot_name"]
-    textFile.button_sqrt_name = data["button_sqrt_name"]
-    textFile.output_res_name = data["output_res_name"]
+        textFile.id = new_id
+        textFile.lang_name = data["lang_name"]
+        textFile.hello_name = data["hello_name"]
+        textFile.input_num_name = data["input_num_name"]
+        textFile.input_dot_name = data["input_dot_name"]
+        textFile.button_sqrt_name = data["button_sqrt_name"]
+        textFile.output_res_name = data["output_res_name"]
 
-    textFile.settings_name = data["settings_name"]
-    textFile.change_lang_name = data["change_lang_name"]
-    textFile.add_lang_name = data["add_lang_name"]
-    textFile.feedback_name = data["feedback_name"]
-    textFile.readme_name = data["readme_name"]
-    textFile.button_save_name = data["button_save_name"]
+        textFile.settings_name = data["settings_name"]
+        textFile.change_lang_name = data["change_lang_name"]
+        textFile.add_lang_name = data["add_lang_name"]
+        textFile.feedback_name = data["feedback_name"]
+        textFile.readme_name = data["readme_name"]
+        textFile.button_save_name = data["button_save_name"]
     # return f"A{new_id}", TextFile(data["lang_name"], data["hello_name"], data["input_num_name"], data["input_dot_name"],
     #                     data["button_sqrt_name"], data["output_res_name"], data["settings_name"], data["change_lang_name"],
     #                     data["add_lang_name"], data["feedback_name"], data["readme_name"], data["button_save_name"])

@@ -29,25 +29,20 @@ def show_input_error():   #вызов окна ошибки
     err.after(2000, err.destroy)
 
 def show_choice_window(): #Окно с изменением языка
-    global text_file
     
     win = Toplevel(root)
     win.title(command1.get())
     win.geometry("500x290")
     win.configure(bg=BG)
 
-    def radiobuttonReturn(current_language_id,new_language_id):
-        global text_file
-        id_changer, changer = l.setLang(text_file, current_language_id, new_language_id, l.refFileJson)
-        if id_changer and changer:
-            text_file = changer
-            setText(changer)
+    def radiobuttonReturn(textFile,current_language_id,new_language_id):
+        l.setLang(textFile, current_language_id, new_language_id, l.refFileJson)
+        setText(text_file)
         win.after(1000, win.destroy)
-        text_file=changer
 
     for d in data:
         ttk.Radiobutton(win, text=data[d]["lang_name"], value=d, 
-                       command=lambda id=d: radiobuttonReturn(text_file.id,id), 
+                       command=lambda id=d: radiobuttonReturn(text_file,text_file.id,id), 
                        style='Dark.TRadiobutton').pack(anchor='w', padx=22, pady=(22,11))
 
 
