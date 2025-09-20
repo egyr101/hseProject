@@ -36,7 +36,6 @@ def show_choice_window(): #Окно с изменением языка
     win.configure(bg=BG)
 
     def radiobuttonReturn(current_language_id,new_language_id):
-        
         id_changer,changer=l.setLang(current_language_id,new_language_id,l.refFileJson)
         setText(changer)
         win.after(1000, win.destroy)
