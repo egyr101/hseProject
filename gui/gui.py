@@ -29,25 +29,31 @@ def show_input_error():   #вызов окна ошибки
     err.after(2000, err.destroy)
 
 def show_choice_window(): #Окно с изменением языка
+    global text_file
     
     win = Toplevel(root)
-    win.title(command1)
+    win.title(command1.get())
     win.geometry("500x290")
     win.configure(bg=BG)
 
     def radiobuttonReturn(current_language_id,new_language_id):
-        id_changer,changer=l.setLang(current_language_id,new_language_id,l.refFileJson)
-        setText(changer)
+        global text_file
+        id_changer, changer = l.setLang(text_file, current_language_id, new_language_id, l.refFileJson)
+        if id_changer and changer:
+            text_file = changer
+            setText(changer)
         win.after(1000, win.destroy)
         text_file=changer
 
     for d in data:
-        ttk.Radiobutton(win, text=data[d]["lang_name"],value=d, command=radiobuttonReturn(text_file.id,d), style='Dark.TRadiobutton').pack(anchor='w', padx=22, pady=(22,11))
+        ttk.Radiobutton(win, text=data[d]["lang_name"], value=d, 
+                       command=lambda id=d: radiobuttonReturn(text_file.id,id), 
+                       style='Dark.TRadiobutton').pack(anchor='w', padx=22, pady=(22,11))
 
 
 def show_newlanguages_window(): #Окно с добавлением языка 
     add_language = Toplevel(root)
-    add_language.title(command2)
+    add_language.title(command2.get())
     add_language.geometry("720x450")
     add_language.configure(bg=BG)
     
@@ -163,9 +169,9 @@ menu_button['menu'] = menu
 
 
 
-menu.add_command(label=command1, command=show_choice_window)
-menu.add_command(label=command2, command=show_newlanguages_window)
-menu.add_command(label=command3)
+menu.add_command(label=command1.get(), command=show_choice_window)
+menu.add_command(label=command2.get(), command=show_newlanguages_window)
+menu.add_command(label=command3.get())
 
 #Для нового языка
 new_vFirst = ""

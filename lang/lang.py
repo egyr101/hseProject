@@ -130,6 +130,8 @@ def primarySetLang(f : str):
                                 text["input_dot_name"], text["button_sqrt_name"], text["output_res_name"],
                                 text["settings_name"], text["change_lang_name"], text["add_lang_name"],
                                 text["feedback_name"], text["readme_name"], text["button_save_name"] )
+            text_file.id = j
+                                
             break
     return text_file
 
