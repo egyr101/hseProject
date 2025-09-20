@@ -1,18 +1,4 @@
 {
-   "A6211702782": {
-      "lang_name": "Русский",
-      "hello_name": "Добро пожаловать в калькулятор корней",
-      "input_num_name": "Введите число, из которого нужно извлечь корень:",
-      "input_dot_name": "Укажите точность знаков после запятой:",
-      "button_sqrt_name": "Вычислить корень",
-      "output_res_name": "Здесь появится ваш ответ",
-      "settings_name": "Настройки",
-      "change_lang_name": "Выбрать язык",
-      "add_lang_name": "Создать свой язык",
-      "feedback_name": "Связаться со службой поддержки",
-      "readme_name": "Ошибка ввода",
-      "button_save_name": "Сохранить"
-   },
    "2511719659": {
       "lang_name": "English",
       "hello_name": "Welcome to the Root Calculator",
@@ -26,5 +12,19 @@
       "feedback_name": "Contact support service",
       "readme_name": "Input error",
       "button_save_name": "Save"
+   },
+   "A6211702782": {
+      "lang_name": "Русский",
+      "hello_name": "Добро пожаловать в калькулятор корней",
+      "input_num_name": "Введите число, из которого нужно извлечь корень:",
+      "input_dot_name": "Укажите точность знаков после запятой:",
+      "button_sqrt_name": "Вычислить корень",
+      "output_res_name": "Здесь появится ваш ответ",
+      "settings_name": "Настройки",
+      "change_lang_name": "Выбрать язык",
+      "add_lang_name": "Создать свой язык",
+      "feedback_name": "Связаться со службой поддержки",
+      "readme_name": "Ошибка ввода",
+      "button_save_name": "Сохранить"
    }
 }

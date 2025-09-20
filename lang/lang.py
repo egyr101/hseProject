@@ -95,7 +95,6 @@ def getJson(f : str):
     return data 
 
 def changeMark(data : dict, id : str, mark : bool):
-    print(1)
     selected = data.pop(id)
 
     if (("A" in id and mark) or ("A" not in id and (not(mark)))):
@@ -123,7 +122,6 @@ def changeMark(data : dict, id : str, mark : bool):
             "readme_name" : selected["readme_name"],
             "button_save_name" : selected["button_save_name"]
         }}
-    print(mark_name+common_id)
     return text
 
 def primarySetLang(f : str):
@@ -162,7 +160,7 @@ def addLang(text : dict, f : str):
         json.dump(data,file,indent=3,ensure_ascii=False)
 
 def setLang(textFile : TextFile, current_id : str, new_id : str, f : str):
-    
+
     if (int("A" in current_id) + int("A" in new_id)) != 1:
         print("A" in current_id + "A" in new_id)
         return None

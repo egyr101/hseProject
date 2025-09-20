@@ -1,6 +1,6 @@
 #гугл форма
 import lang.lang as l
-# import gui.gui as g
+import gui.gui as g
 
 
 # text1,text2,text3 = "aaasdaaрфыврфsd","dsssfdsfs","aaasdыфовфрaasd"

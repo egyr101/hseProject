@@ -37,6 +37,7 @@ def show_choice_window(): #Окно с изменением языка
 
     def radiobuttonReturn(textFile,current_language_id,new_language_id):
         l.setLang(textFile, current_language_id, new_language_id, l.refFileJson)
+        text_file.setTextFile(new_language_id,text_file.createJson()[text_file.id])
         setText(text_file)
         win.after(1000, win.destroy)
 
