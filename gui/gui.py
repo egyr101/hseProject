@@ -22,12 +22,13 @@ def on_show_text():  #работа с введенными числами
 
 def show_input_error():   #вызов окна ошибки
     err = Toplevel(root)
-    err.title(error_text)
+    err.title(error_text.get())
     err.geometry("650x290")
     err.resizable(False, False)
     err.configure(bg='red')
-    ttk.Label(err, textvariable=error_text, bg='red', fg='white', font=('Segoe UI', 20, 'bold')).pack(expand=True, fill='both')
-    err.after(2000, err.destroy)
+    ttk.Label(err, textvariable=error_text,background='red', foreground='white', font=('Segoe UI', 16, 'bold')).place(relx=0.5, rely=0.5, anchor='center')
+    err.after(3000, err.destroy)
+
 
 def show_choice_window(): #Окно с изменением языка
     
