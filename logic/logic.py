@@ -1,5 +1,6 @@
 '''Извлечение корней из всех чисел'''
 from decimal import Decimal, getcontext
+import gui.gui as g
 
 ''' from numba import njit '''
 
@@ -59,6 +60,7 @@ def sqrt_complex(a, b, dot):
         return f'± ({re} + i * {im})'
 
 def num_type(a, dot):
+
     try:
         n = complex(a)
         
@@ -71,20 +73,23 @@ def num_type(a, dot):
             return sqrt_complex(n.real, n.imag, dot)                   # комплексное число
             
     except ValueError:
-        return 'Error!'
+        g.show_input_error()
+        return 
 
-num = input()
-dot = input()
-
-num = num.replace('i', 'j', -1)     # комплексные числа python пишет с j, а не с i, как делает пользователь
-num = num.replace(' ', '', -1)      # защита от лишних пробелов, выставленных пользователем в комплексном числе
-num = num.replace(',', '.', -1)     # пайтон не воспринимает вещественные числа с плавающей точкой, если вместо точки использована запятая
-
-if dot.isdigit():
-    if int(dot) >= 0:
-        dot = int(dot)
-        print(num_type(num, dot))
+def answer(a,dot):
+    a = a.replace('i', 'j', -1)
+    a = a.replace(' ', '', -1)
+    a = a.replace(',', '.', -1)
+    dot = dot.replace(' ', '', -1)
+    if dot.isdigit():
+        if int(dot) >= 0:
+            dot = int(dot)
+            return num_type(a, dot)
+        else:
+            g.show_input_error()
+            return
+    elif dot=='':
+        return num_type(a, 5)
     else:
-        print('Error!')
-else:
-    print('Error!')
+        g.show_input_error()
+        return

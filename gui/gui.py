@@ -3,6 +3,7 @@ from tkinter import ttk
 import ctypes
 import lang.lang as l
 import random
+import logic.logic as lg
 flag=0
 
 text_file = l.primarySetLang(l.refFileJson)
@@ -10,21 +11,21 @@ text_file = l.primarySetLang(l.refFileJson)
 ctypes.windll.shcore.SetProcessDpiAwareness(1)
 
 def on_show_text():  #работа с введенными числами
-    if number.get() == "1234":   
-        show_input_error()
-        return
-    output_var.set(number.get())
-    second_value = accuracy.get()
-    number.set("")
-    accuracy.set("")
+    global FULLBG
+    first_value = entry1.get()
+    second_value = entry2.get()
+    output_var.set(lg.answer(first_value, second_value))
+    if output_var.get() == '':
+        output_var.set(text_file.readme_name)
+    entry1.delete(0, END)
+    entry2.delete(0, END)
     frame_output.configure(background=FULLBG)
     output_label.configure(background=FULLBG)
 
 def show_input_error():   #вызов окна ошибки
     err = Toplevel(root)
     err.title(error_text.get())
-    err.geometry("650x290")
-    err.resizable(False, False)
+    err.geometry("800x290")
     err.configure(bg='red')
     ttk.Label(err, textvariable=error_text,background='red', foreground='white', font=('Segoe UI', 16, 'bold')).place(relx=0.5, rely=0.5, anchor='center')
     err.after(3000, err.destroy)
@@ -233,40 +234,17 @@ root.tk.call('tk', 'scaling', 2.5)
 title_label = ttk.Label(root, textvariable=title_on_screen, style='Title.TLabel')
 title_label.place(relx=0.15, y=100)
 
-
-
-# Обновляем меню с правильными текстами
-
-
-#Для нового языка
-new_vFirst = ""
-new_vSecond = ""
-new_vThird = ""
-new_vFourth = ""
-
-#Кнопки взаимодействия на основном экране
-
-
- 
-
-
 label1 = ttk.Label(root, textvariable=input_num, style='Dark.TLabel')
 label1.place(x=30, y=220)
-
-number = StringVar()
-accuracy = StringVar()
  
-entry1 = ttk.Entry(root, textvariable=number, style='Dark.TEntry')
+entry1 = ttk.Entry(root, style='Dark.TEntry')
 entry1.place(x=30, y=260, width=680, height=50)
 
-entry2 = ttk.Entry(root, textvariable=accuracy, style='Dark.TEntry')
+entry2 = ttk.Entry(root, style='Dark.TEntry')
 entry2.place(x=730, y=260, width=430, height=50)
-
 
 label2 = ttk.Label(root, textvariable=input_dot, style='Dark.TLabel')
 label2.place(x=730, y=220)
-
-
 
 button = ttk.Button(root, textvariable=button_text, command=on_show_text, style='Dark.TButton')
 button.place(relx=0.5, y=360, anchor='center')

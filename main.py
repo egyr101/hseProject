@@ -1,6 +1,7 @@
 #гугл форма
 import lang.lang as l
 import gui.gui as g
+import logic.logic as lg
 
 
 # text1,text2,text3 = "aaasdaaрфыврфsd","dsssfdsfs","aaasdыфовфрaasd"
