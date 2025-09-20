@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import ctypes
 import lang.lang as l
+import random
 flag=0
 
 text_file = l.primarySetLang(l.refFileJson)
@@ -119,7 +120,21 @@ def show_newlanguages_window(): #Окно с добавлением языка
         command2_input = e_command2.get()
         command3_input = e_command3.get()
         save_text_input = e_save_text.get()
-        
+        t = {str(random.randint(1000000000,9999999999)) : {
+            "lang_name" : language_name_input,
+            "hello_name" : title_on_screen_input, 
+            "input_num_name" : input_num_input,
+            "input_dot_name" : input_dot_input,
+            "button_sqrt_name" : button_text_input,
+            "output_res_name" : output_var_input,
+            "settings_name" : settings_text_input,
+            "change_lang_name" : command1_input, 
+            "add_lang_name" : command2_input,
+            "feedback_name" : command3_input,
+            "readme_name" : error_text_input,
+            "button_save_name" : save_text_input
+        }}
+        l.addLang(t,l.refFileJson)
         
     save_btn = ttk.Button(add_language, textvariable=save_text, style='Dark.TButton', command=_save_new_language)
     save_btn.place(x=800, y=120, width=170, height=60)
