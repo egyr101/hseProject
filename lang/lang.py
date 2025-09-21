@@ -73,19 +73,16 @@ def validationJson(data):
     for j in data:
 
         try:
-            print()
             checkLenElem = False
             elem = TextFile(data[j]["lang_name"], data[j]["hello_name"], data[j]["input_num_name"], data[j]["input_dot_name"],
                         data[j]["button_sqrt_name"], data[j]["output_res_name"], data[j]["settings_name"], data[j]["change_lang_name"],
                         data[j]["add_lang_name"], data[j]["feedback_name"], data[j]["readme_name"], data[j]["button_save_name"])
             checkLenElem = (len(data[j]) == 12)
         except:
-            print(4)
             return False
             
         
         if not(checkLenElem):
-            print(5)
             return False
         
     return True
@@ -97,7 +94,6 @@ def getJson(f : str):
     
     if validationJson(data):
         return True,data
-    print(3)
     return False, None
 #     if not(validationJson(f,data)):
 #         return None 
@@ -140,7 +136,6 @@ def primarySetLang(f : str):
     check, file_json = getJson(refFileJson)
 
     if check == False:
-        print(2)
         return False, None
 
     for j in file_json:
