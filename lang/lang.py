@@ -65,42 +65,12 @@ class TextFile:
         self.readme_name = text["readme_name"]
         self.button_save_name = text["button_save_name"]
 
-
-def validationJson(data):
-
-    checkLenElem = False
-
-    for j in data:
-
-        try:
-            checkLenElem = False
-            elem = TextFile(data[j]["lang_name"], data[j]["hello_name"], data[j]["input_num_name"], data[j]["input_dot_name"],
-                        data[j]["button_sqrt_name"], data[j]["output_res_name"], data[j]["settings_name"], data[j]["change_lang_name"],
-                        data[j]["add_lang_name"], data[j]["feedback_name"], data[j]["readme_name"], data[j]["button_save_name"])
-            checkLenElem = (len(data[j]) == 12)
-        except:
-            return False
-            
-        
-        if not(checkLenElem):
-            return False
-        
-    return True
-
 def getJson(f : str):
 
     with open(f, "r", encoding="utf-8") as file:
-        try:
-            data = json.load(file)
-            print(data)
-        except:
-            print(2)
-            return False, None
-        if validationJson(data):
-                return True,data
-        return False, None
-#     if not(validationJson(f,data)):
-#         return None 
+        data = json.load(file)
+    return data
+
 
 def changeMark(data : dict, id : str, mark : bool):
 
@@ -137,10 +107,7 @@ def changeMark(data : dict, id : str, mark : bool):
 
 def primarySetLang(f : str):
 
-    check, file_json = getJson(refFileJson)
-
-    if check == False:
-        return False, None
+    file_json = getJson(refFileJson)
 
     for j in file_json:
         if "A" in j:
@@ -152,36 +119,27 @@ def primarySetLang(f : str):
             text_file.id = j
                                 
             break
-    return True, text_file
+    return text_file
 
 
 def addLang(text : dict, f : str):
 
-    check, data = getJson(f)
-
-    if check == False:
-        return False
-    
+    data = getJson(f)
     data.update(text)
 
     with open(f,"w", encoding="utf-8") as file:
         json.dump(data,file,indent=3,ensure_ascii=False)
 
-    return True
 
 def setLang(textFile : TextFile, current_id : str, new_id : str, f : str):
 
     if (current_id == new_id):
-        return "no change"
+        return False
     else:
         if (int("A" in current_id) + int("A" in new_id)) != 1:
             return False
         
-        check, data = getJson(f)
-        if check == False:
-            return False
-
-
+        data = getJson(f)
 
         with open(f, "w", encoding="utf-8") as file:
 
@@ -201,6 +159,3 @@ def setLang(textFile : TextFile, current_id : str, new_id : str, f : str):
             data = data[f"A{new_id}"]
             textFile.setTextFile(f"{new_id}",data)
         return True
-    # return f"A{new_id}", TextFile(data["lang_name"], data["hello_name"], data["input_num_name"], data["input_dot_name"],
-    #                     data["button_sqrt_name"], data["output_res_name"], data["settings_name"], data["change_lang_name"],
-    #                     data["add_lang_name"], data["feedback_name"], data["readme_name"], data["button_save_name"])

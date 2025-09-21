@@ -1,30 +1,13 @@
 from tkinter import *
 from tkinter import ttk
+import webbrowser
 import ctypes
 import lang.lang as l
 import random
 import logic.logic as lg
-import sys
 flag=0
-title='Root Calculator'
-root = Tk()
-root.title(title)
-root.geometry("1200x720")
-root.resizable(False, True)
-root.tk.call('tk', 'scaling', 2.5)
-def json_error():
-    error=Toplevel(root)
-    error.title("Error")
-    error.geometry("800x290")
-    error.configure(bg='red')
-    ttk.Label(error, text='Json error, please, reinstall the program',background='red', foreground='white', font=('Segoe UI', 16, 'bold')).place(relx=0.5, rely=0.5, anchor='center')
 
-    root.mainloop()
-    sys.exit()
-
-check, text_file = l.primarySetLang(l.refFileJson)
-if check == False:
-    json_error()
+text_file = l.primarySetLang(l.refFileJson)
 
 ctypes.windll.shcore.SetProcessDpiAwareness(1)
 
@@ -38,7 +21,7 @@ def on_show_text():  #работа с введенными числами
     entry1.delete(0, END)
     entry2.delete(0, END)
     frame_output.configure(background=FULLBG)
-    output_label.configure(background=FULLBG)
+    text_output.configure(background=FULLBG)
 
 def show_input_error():   #вызов окна ошибки
     err = Toplevel(root)
@@ -47,6 +30,7 @@ def show_input_error():   #вызов окна ошибки
     err.configure(bg='red')
     ttk.Label(err, textvariable=error_text,background='red', foreground='white', font=('Segoe UI', 16, 'bold')).place(relx=0.5, rely=0.5, anchor='center')
     err.after(3000, err.destroy)
+
 
 def show_choice_window(): #Окно с изменением языка
     
@@ -57,22 +41,13 @@ def show_choice_window(): #Окно с изменением языка
 
     def radiobuttonReturn(textFile,current_language_id,new_language_id):
         global menu
-        print(text_file, current_language_id, new_language_id)
-        check = l.setLang(textFile, current_language_id, new_language_id, l.refFileJson)
-        if not(check):
-            json_error()
-        if check != "no change":
+        if l.setLang(textFile, current_language_id, new_language_id, l.refFileJson):
             text_file.setTextFile(new_language_id,text_file.createJson()[text_file.id])
             setText(text_file, menu)
         win.after(1000, win.destroy)
-    check, data = l.getJson(l.refFileJson)
-    if not(check):
-        json_error()
-    for d in data:
-        check, t = l.getJson(l.refFileJson)
-        if check == False:
-            json_error()
-        ttk.Radiobutton(win, text=t[d]["lang_name"], value=d, 
+
+    for d in l.getJson(l.refFileJson):
+        ttk.Radiobutton(win, text=l.getJson(l.refFileJson)[d]["lang_name"], value=d, 
                        command=lambda id=d: radiobuttonReturn(text_file,text_file.id,id), 
                        style='Dark.TRadiobutton').pack(anchor='w', padx=22, pady=(22,11))
 
@@ -82,54 +57,55 @@ def show_newlanguages_window(): #Окно с добавлением языка
     add_language.title(command2.get())
     add_language.geometry("1000x1000")
     add_language.configure(bg=BG)
+    output_var.set(text_file.output_res_name)
     
 
     
-    ttk.Label(add_language, textvariable=language_name, style='Dark.TLabel').place(x=30, y=30)
+    ttk.Label(add_language, textvariable=language_name, style='Dark.TLabel').place(x=30, y=20)
     e_language_name = ttk.Entry(add_language, style='Dark.TEntry')
     e_language_name.place(x=30, y=60, width=620, height=36)
 
-    ttk.Label(add_language, textvariable=title_on_screen, style='Dark.TLabel').place(x=30, y=110)
+    ttk.Label(add_language, textvariable=title_on_screen, style='Dark.TLabel').place(x=30, y=100)
     e_title_on_screen = ttk.Entry(add_language, style='Dark.TEntry')
     e_title_on_screen.place(x=30, y=140, width=620, height=36)
 
-    ttk.Label(add_language, textvariable=input_num, style='Dark.TLabel').place(x=30, y=190)
+    ttk.Label(add_language, textvariable=input_num, style='Dark.TLabel').place(x=30, y=180)
     e_input_num = ttk.Entry(add_language, style='Dark.TEntry')
     e_input_num.place(x=30, y=220, width=620, height=36)
 
-    ttk.Label(add_language, textvariable=input_dot, style='Dark.TLabel').place(x=30, y=270)
+    ttk.Label(add_language, textvariable=input_dot, style='Dark.TLabel').place(x=30, y=260)
     e_input_dot = ttk.Entry(add_language, style='Dark.TEntry')
     e_input_dot.place(x=30, y=300, width=620, height=36)
 
-    ttk.Label(add_language, textvariable=button_text, style='Dark.TLabel').place(x=30, y=350)
+    ttk.Label(add_language, textvariable=button_text, style='Dark.TLabel').place(x=30, y=340)
     e_button_text = ttk.Entry(add_language, style='Dark.TEntry')
     e_button_text.place(x=30, y=380, width=620, height=36)
 
-    ttk.Label(add_language, textvariable=output_var, style='Dark.TLabel').place(x=30, y=430)
+    ttk.Label(add_language, textvariable=output_var, style='Dark.TLabel').place(x=30, y=420)
     e_output_var = ttk.Entry(add_language, style='Dark.TEntry')
     e_output_var.place(x=30, y=460, width=620, height=36)
 
-    ttk.Label(add_language, textvariable=settings_text, style='Dark.TLabel').place(x=30, y=510)
+    ttk.Label(add_language, textvariable=settings_text, style='Dark.TLabel').place(x=30, y=500)
     e_settings_text = ttk.Entry(add_language, style='Dark.TEntry')
     e_settings_text.place(x=30, y=540, width=620, height=36)
 
-    ttk.Label(add_language, textvariable=error_text, style='Dark.TLabel').place(x=30, y=590)
+    ttk.Label(add_language, textvariable=error_text, style='Dark.TLabel').place(x=30, y=580)
     e_error_text = ttk.Entry(add_language, style='Dark.TEntry')
     e_error_text.place(x=30, y=620, width=620, height=36)
 
-    ttk.Label(add_language, textvariable=command1, style='Dark.TLabel').place(x=30, y=670)
+    ttk.Label(add_language, textvariable=command1, style='Dark.TLabel').place(x=30, y=660)
     e_command1 = ttk.Entry(add_language, style='Dark.TEntry')
     e_command1.place(x=30, y=700, width=620, height=36)
 
-    ttk.Label(add_language, textvariable=command2, style='Dark.TLabel').place(x=30, y=750)
+    ttk.Label(add_language, textvariable=command2, style='Dark.TLabel').place(x=30, y=740)
     e_command2 = ttk.Entry(add_language, style='Dark.TEntry')
     e_command2.place(x=30, y=780, width=620, height=36)
 
-    ttk.Label(add_language,textvariable=command3, style='Dark.TLabel').place(x=30, y=830)
+    ttk.Label(add_language,textvariable=command3, style='Dark.TLabel').place(x=30, y=820)
     e_command3 = ttk.Entry(add_language, style='Dark.TEntry')
     e_command3.place(x=30, y=860, width=620, height=36)
 
-    ttk.Label(add_language,textvariable=save_text, style='Dark.TLabel').place(x=30, y=910)
+    ttk.Label(add_language,textvariable=save_text, style='Dark.TLabel').place(x=30, y=900)
     e_save_text = ttk.Entry(add_language, style='Dark.TEntry')
     e_save_text.place(x=30, y=940, width=620, height=36)
 
@@ -165,8 +141,7 @@ def show_newlanguages_window(): #Окно с добавлением языка
                 "readme_name" : error_text_input,
                 "button_save_name" : save_text_input
             }}
-            if not(l.addLang(t,l.refFileJson)):
-                json_error()
+            l.addLang(t,l.refFileJson)
             add_language.after(1000, add_language.destroy)
         
     save_btn = ttk.Button(add_language, textvariable=save_text, style='Dark.TButton', command=_save_new_language)
@@ -179,13 +154,13 @@ def initStyles(BG,FG,BBG,FULLBG):
     root.configure(bg=BG)
     style.configure('Title.TLabel', font=('Segoe UI', 16, 'bold'), background=BG, foreground=FG)
     style.configure('Dark.TFrame', background=BG)
-    style.configure('Dark.TLabel', background=BG, foreground=FG)
-    style.configure('Dark.TButton', background=BBG, foreground=FG, bordercolor=FULLBG, focuscolor=FULLBG, lightcolor=FULLBG, darkcolor=FULLBG, highlightcolor=FULLBG)
+    style.configure('Dark.TLabel', background=BG, foreground=FG, font=('Segoe UI', 11, 'bold'))
+    style.configure('Dark.TButton', background=BBG, foreground=FG, bordercolor=FULLBG, focuscolor=FULLBG, lightcolor=FULLBG, darkcolor=FULLBG, highlightcolor=FULLBG, font=('Segoe UI', 11, 'bold'))
     style.map('Dark.TButton', background=[('active', FULLBG), ('pressed', FULLBG)])
     style.configure('Dark.TEntry', fieldbackground=BBG, foreground=FG, background=BG,bordercolor=FULLBG, focuscolor=FULLBG, lightcolor=FULLBG, darkcolor=FULLBG, highlightcolor=FULLBG)
-    style.configure('Dark.TMenubutton', background=BBG, foreground=FG,bordercolor=FULLBG, focuscolor=FULLBG, lightcolor=FULLBG, darkcolor=FULLBG, highlightcolor=FULLBG)
+    style.configure('Dark.TMenubutton', background=BBG, foreground=FG,bordercolor=FULLBG, focuscolor=FULLBG, lightcolor=FULLBG, darkcolor=FULLBG, highlightcolor=FULLBG, font=('Segoe UI', 11, 'bold'))
     style.map('Dark.TMenubutton', background=[('active', FULLBG), ('pressed', FULLBG)])
-    style.configure('Dark.TRadiobutton', background=BG, foreground=FG)
+    style.configure('Dark.TRadiobutton', background=BG, foreground=FG, font=('Segoe UI', 11, 'bold'))
     style.map('Dark.TRadiobutton', background=[('active', FULLBG), ('pressed', FULLBG)])
 
 def setText (text_file : l.TextFile, menu_obj: Menu):
@@ -212,12 +187,21 @@ def setText (text_file : l.TextFile, menu_obj: Menu):
     flag=1
     menu_obj.add_command(label=text_file.change_lang_name, command=show_choice_window)
     menu_obj.add_command(label=text_file.add_lang_name, command=show_newlanguages_window)
-    menu_obj.add_command(label=text_file.feedback_name)
+    menu_obj.add_command(label=text_file.feedback_name, command=open_feedback)
+
+def open_feedback():
+    webbrowser.open('https://docs.google.com/forms/d/e/1FAIpQLSffgZP_SDDXMVy4LHtLZJr5nWSfNcUzVh4tXj0hXFzn6RmYdQ/viewform?usp=dialog')
+
+def _sync_output_to_text(*_):
+    text_output.config(state='normal')
+    text_output.delete('1.0', END)
+    text_output.insert('1.0', output_var.get())
+    text_output.config(state='disabled')
 
 
+title='Root Calculator'
+root = Tk()
 
-
-#Все переменные для языка
 language_name = StringVar()
 title_on_screen = StringVar()
 settings_text = StringVar()
@@ -240,17 +224,20 @@ BBG='#5a189a' #Чуть светлее бэка для заливки полей
 FULLBG='#10002b' #самый темный
 initStyles(BG,FG,BBG,FULLBG)
 
-
-menu_button = ttk.Menubutton(root, textvariable=settings_text, style='Dark.TMenubutton')
-menu_button.pack(anchor='ne')
-menu = Menu(menu_button, tearoff=0, bg=BG, fg=FG, activebackground=BBG, activeforeground=FG, relief='flat', bd=0)
+frame = Frame(root, highlightthickness=2, highlightbackground=FULLBG, bg=BG)
+frame.place(relx=0.83, y=13)
+menu_button = ttk.Menubutton(frame, textvariable=settings_text, style='Dark.TMenubutton')
+menu_button.pack()
+menu = Menu(menu_button, tearoff=0, bg=BG, fg=FG, activebackground=BBG, activeforeground=FG)
 menu.configure(font=('Segoe UI', 16))
 menu_button['menu'] = menu
 
 
 setText(text_file, menu)
 
-
+root.title(title)
+root.geometry("1300x720")
+root.tk.call('tk', 'scaling', 2.5)
 
 
 title_label = ttk.Label(root, textvariable=title_on_screen, style='Title.TLabel')
@@ -272,8 +259,20 @@ button = ttk.Button(root, textvariable=button_text, command=on_show_text, style=
 button.place(relx=0.5, y=360, anchor='center')
 
 frame_output = Frame(root, highlightthickness=3, highlightbackground=FULLBG, background=BG)
-frame_output.place(x=3, y=430, relwidth=1, width=-10)
-output_label = ttk.Label(frame_output, textvariable=output_var, wraplength=1150, style='Dark.TLabel')
-output_label.pack(fill='both', expand=True, padx=30)
+frame_output.place(x=0, y=430, relwidth=1)
+frame_output.configure(background=FULLBG)
+
+scrollbar = ttk.Scrollbar(frame_output, orient="vertical")
+text_output = Text(frame_output, wrap='word', yscrollcommand=scrollbar.set, bg=FULLBG, fg=FG, font=('Segoe UI', 12), relief='flat', bd=0)
+scrollbar.configure(command=text_output.yview)
+
+text_output.pack(side='left', fill='both', expand=True, padx=(30, 0), pady=30)
+scrollbar.pack(side='right', fill='y')
+
+text_output.insert('1.0', output_var.get())
+text_output.config(state='disabled')
+
+output_var.trace_add('write', _sync_output_to_text)
+
 
 root.mainloop()

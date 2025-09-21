@@ -1,17 +1,4 @@
 {
-   "2511719659": {
-      "lang_name": "English",
-      "hello_name": "Welcome to the Root Calculator",
-      "input_num_name": "Enter the number to extract the root from:",
-      "input_dot_name": "Specify the number of decimal places:",
-      "button_sqrt_name": "Calculate root",
-      "output_res_name": "Your answer will appear here",
-      "settings_name": "Settings",
-      "change_lang_name": "Choose language",
-      "add_lang_name": "Create your language",
-      "feedback_name": "Contact support service",
-      "readme_name": "Error, please change the input"
-   },
    "5082369307": {
       "lang_name": "ewrwfe",
       "hello_name": "fwefwew",
@@ -26,7 +13,7 @@
       "readme_name": "eqweqw",
       "button_save_name": "safeafa"
    },
-   "A6211702782": {
+   "6211702782": {
       "lang_name": "Русский",
       "hello_name": "Добро пожаловать в калькулятор корней",
       "input_num_name": "Введите число, из которого нужно извлечь корень:",
@@ -39,5 +26,19 @@
       "feedback_name": "Связаться со службой поддержки",
       "readme_name": "Ошибка, пожалуйста, измените ввод",
       "button_save_name": "Сохранить"
+   },
+   "A2511719659": {
+      "lang_name": "English",
+      "hello_name": "Welcome to the Root Calculator",
+      "input_num_name": "Enter the number to extract the root from:",
+      "input_dot_name": "Specify the number of decimal places:",
+      "button_sqrt_name": "Calculate root",
+      "output_res_name": "Your answer will appear here",
+      "settings_name": "Settings",
+      "change_lang_name": "Choose language",
+      "add_lang_name": "Create your language",
+      "feedback_name": "Contact support service",
+      "readme_name": "Error, please change the input",
+      "button_save_name": "Save"
    }
 }
