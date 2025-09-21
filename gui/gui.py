@@ -4,15 +4,23 @@ import ctypes
 import lang.lang as l
 import random
 import logic.logic as lg
+import sys
 flag=0
-
+title='Root Calculator'
+root = Tk()
+root.title(title)
+root.geometry("1200x720")
+root.resizable(False, True)
+root.tk.call('tk', 'scaling', 2.5)
 def json_error():
     error=Toplevel(root)
     error.title("Error")
     error.geometry("800x290")
     error.configure(bg='red')
-    ttk.Label(error, text='Json error,plese,restart the program',background='red', foreground='white', font=('Segoe UI', 16, 'bold')).place(relx=0.5, rely=0.5, anchor='center')
-    error.after(4000, root.destroy)
+    ttk.Label(error, text='Json error, please, reinstall the program',background='red', foreground='white', font=('Segoe UI', 16, 'bold')).place(relx=0.5, rely=0.5, anchor='center')
+
+    root.mainloop()
+    sys.exit()
 
 check, text_file = l.primarySetLang(l.refFileJson)
 if check == False:
@@ -208,8 +216,7 @@ def setText (text_file : l.TextFile, menu_obj: Menu):
 
 
 
-title='Root Calculator'
-root = Tk()
+
 #Все переменные для языка
 language_name = StringVar()
 title_on_screen = StringVar()
@@ -243,10 +250,7 @@ menu_button['menu'] = menu
 
 setText(text_file, menu)
 
-root.title(title)
-root.geometry("1200x720")
-root.resizable(False, True)
-root.tk.call('tk', 'scaling', 2.5)
+
 
 
 title_label = ttk.Label(root, textvariable=title_on_screen, style='Title.TLabel')

@@ -90,11 +90,15 @@ def validationJson(data):
 def getJson(f : str):
 
     with open(f, "r", encoding="utf-8") as file:
-        data = json.load(file)
-    
-    if validationJson(data):
-        return True,data
-    return False, None
+        try:
+            data = json.load(file)
+            print(data)
+        except:
+            print(2)
+            return False, None
+        if validationJson(data):
+                return True,data
+        return False, None
 #     if not(validationJson(f,data)):
 #         return None 
 
