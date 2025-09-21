@@ -5,14 +5,23 @@ import lang.lang as l
 import random
 import logic.logic as lg
 flag=0
+title='Root Calculator'
+root = Tk()
 
 def json_error():
+    print(1)
     error=Toplevel(root)
+    print(2)
     error.title("Error")
+    print(3)
     error.geometry("800x290")
+    print(4)
     error.configure(bg='red')
+    print(5)
     ttk.Label(error, text='Json error,plese,restart the program',background='red', foreground='white', font=('Segoe UI', 16, 'bold')).place(relx=0.5, rely=0.5, anchor='center')
-    error.after(4000, root.destroy)
+    print(6)
+    error.after(4000, root.quit)
+    print(7)
 
 check, text_file = l.primarySetLang(l.refFileJson)
 if check == False:
@@ -171,13 +180,13 @@ def initStyles(BG,FG,BBG,FULLBG):
     root.configure(bg=BG)
     style.configure('Title.TLabel', font=('Segoe UI', 16, 'bold'), background=BG, foreground=FG)
     style.configure('Dark.TFrame', background=BG)
-    style.configure('Dark.TLabel', background=BG, foreground=FG)
-    style.configure('Dark.TButton', background=BBG, foreground=FG, bordercolor=FULLBG, focuscolor=FULLBG, lightcolor=FULLBG, darkcolor=FULLBG, highlightcolor=FULLBG)
+    style.configure('Dark.TLabel', background=BG, foreground=FG,font=('Segoe UI', 18, 'bold'))
+    style.configure('Dark.TButton', background=BBG, foreground=FG, bordercolor=FULLBG, focuscolor=FULLBG, lightcolor=FULLBG, darkcolor=FULLBG, highlightcolor=FULLBG,font=('Segoe UI', 18, 'bold'))
     style.map('Dark.TButton', background=[('active', FULLBG), ('pressed', FULLBG)])
     style.configure('Dark.TEntry', fieldbackground=BBG, foreground=FG, background=BG,bordercolor=FULLBG, focuscolor=FULLBG, lightcolor=FULLBG, darkcolor=FULLBG, highlightcolor=FULLBG)
-    style.configure('Dark.TMenubutton', background=BBG, foreground=FG,bordercolor=FULLBG, focuscolor=FULLBG, lightcolor=FULLBG, darkcolor=FULLBG, highlightcolor=FULLBG)
+    style.configure('Dark.TMenubutton', background=BBG, foreground=FG,bordercolor=FULLBG, focuscolor=FULLBG, lightcolor=FULLBG, darkcolor=FULLBG, highlightcolor=FULLBG,font=('Segoe UI', 18, 'bold'))
     style.map('Dark.TMenubutton', background=[('active', FULLBG), ('pressed', FULLBG)])
-    style.configure('Dark.TRadiobutton', background=BG, foreground=FG)
+    style.configure('Dark.TRadiobutton', background=BG, foreground=FG,font=('Segoe UI', 18, 'bold'))
     style.map('Dark.TRadiobutton', background=[('active', FULLBG), ('pressed', FULLBG)])
 
 def setText (text_file : l.TextFile, menu_obj: Menu):
@@ -208,8 +217,7 @@ def setText (text_file : l.TextFile, menu_obj: Menu):
 
 
 
-title='Root Calculator'
-root = Tk()
+
 #Все переменные для языка
 language_name = StringVar()
 title_on_screen = StringVar()
@@ -237,14 +245,14 @@ initStyles(BG,FG,BBG,FULLBG)
 menu_button = ttk.Menubutton(root, textvariable=settings_text, style='Dark.TMenubutton')
 menu_button.pack(anchor='ne')
 menu = Menu(menu_button, tearoff=0, bg=BG, fg=FG, activebackground=BBG, activeforeground=FG, relief='flat', bd=0)
-menu.configure(font=('Segoe UI', 16))
+menu.configure(font=('Segoe UI', 30))
 menu_button['menu'] = menu
 
 
 setText(text_file, menu)
 
 root.title(title)
-root.geometry("1200x720")
+root.geometry("1300x720")
 root.resizable(False, True)
 root.tk.call('tk', 'scaling', 2.5)
 
@@ -269,7 +277,7 @@ button.place(relx=0.5, y=360, anchor='center')
 
 frame_output = Frame(root, highlightthickness=3, highlightbackground=FULLBG, background=BG)
 frame_output.place(x=3, y=430, relwidth=1, width=-10)
-output_label = ttk.Label(frame_output, textvariable=output_var, wraplength=1150, style='Dark.TLabel')
+output_label = ttk.Label(frame_output, textvariable=output_var, wraplength=1200, style='Dark.TLabel')
 output_label.pack(fill='both', expand=True, padx=30)
 
 root.mainloop()
