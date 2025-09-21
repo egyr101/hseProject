@@ -1,18 +1,4 @@
 {
-   "5082369307": {
-      "lang_name": "ewrwfe",
-      "hello_name": "fwefwew",
-      "input_num_name": "r4r4r2",
-      "input_dot_name": "fessefse",
-      "button_sqrt_name": "dwadeaw",
-      "output_res_name": "ffwefa",
-      "settings_name": "effafaf",
-      "change_lang_name": "dqwdqdq",
-      "add_lang_name": "dsadad",
-      "feedback_name": "fewfwfw",
-      "readme_name": "eqweqw",
-      "button_save_name": "safeafa"
-   },
    "6211702782": {
       "lang_name": "Русский",
       "hello_name": "Добро пожаловать в калькулятор корней",
@@ -26,6 +12,20 @@
       "feedback_name": "Связаться со службой поддержки",
       "readme_name": "Ошибка, пожалуйста, измените ввод",
       "button_save_name": "Сохранить"
+   },
+   "5082369307": {
+      "lang_name": "ewrwfe",
+      "hello_name": "fwefwew",
+      "input_num_name": "r4r4r2",
+      "input_dot_name": "fessefse",
+      "button_sqrt_name": "dwadeaw",
+      "output_res_name": "ffwefa",
+      "settings_name": "effafaf",
+      "change_lang_name": "dqwdqdq",
+      "add_lang_name": "dsadad",
+      "feedback_name": "fewfwfw",
+      "readme_name": "eqweqw",
+      "button_save_name": "safeafa"
    },
    "A2511719659": {
       "lang_name": "English",

@@ -110,7 +110,7 @@ def show_newlanguages_window(): #Окно с добавлением языка
     e_save_text.place(x=30, y=940, width=620, height=36)
 
 
-    def _save_new_language(): 
+    def _save_new_language(): #Сохранение языка
         language_name_input = e_language_name.get()
         title_on_screen_input = e_title_on_screen.get()
         input_num_input = e_input_num.get()
@@ -148,7 +148,7 @@ def show_newlanguages_window(): #Окно с добавлением языка
     save_btn.place(x=800, y=120, width=170, height=60)
 
 
-def initStyles(BG,FG,BBG,FULLBG):
+def initStyles(BG,FG,BBG,FULLBG): #Создание стилей
     style = ttk.Style()
     style.theme_use('clam')
     root.configure(bg=BG)
@@ -163,7 +163,7 @@ def initStyles(BG,FG,BBG,FULLBG):
     style.configure('Dark.TRadiobutton', background=BG, foreground=FG, font=('Segoe UI', 11, 'bold'))
     style.map('Dark.TRadiobutton', background=[('active', FULLBG), ('pressed', FULLBG)])
 
-def setText (text_file : l.TextFile, menu_obj: Menu):
+def setText (text_file : l.TextFile, menu_obj: Menu): #Смена текста
     global flag
     language_name.set(text_file.lang_name)
     title_on_screen.set(text_file.hello_name)
@@ -189,10 +189,10 @@ def setText (text_file : l.TextFile, menu_obj: Menu):
     menu_obj.add_command(label=text_file.add_lang_name, command=show_newlanguages_window)
     menu_obj.add_command(label=text_file.feedback_name, command=open_feedback)
 
-def open_feedback():
-    webbrowser.open('https://docs.google.com/forms/d/e/1FAIpQLSffgZP_SDDXMVy4LHtLZJr5nWSfNcUzVh4tXj0hXFzn6RmYdQ/viewform?usp=dialog')
+def open_feedback(): #Гугл форма
+    webbrowser.open('https://docs.google.com/forms/d/e/1FAIpQLScnC5KYOSnz49jwJXBYuXrMPsJJXniLOk6kRFoQ14_fGt3lsw/viewform?usp=header')
 
-def _sync_output_to_text(*_):
+def _sync_output_to_text(*_): #смена текста в выводе
     text_output.config(state='normal')
     text_output.delete('1.0', END)
     text_output.insert('1.0', output_var.get())
