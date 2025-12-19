@@ -1,0 +1,14 @@
+C:\Users\Honor\Desktop\прога ВЫШКА\лабораторка 5-6\laba56\laba56\bin\Debug\net8.0\laba56.exe
+C:\Users\Honor\Desktop\прога ВЫШКА\лабораторка 5-6\laba56\laba56\bin\Debug\net8.0\laba56.deps.json
+C:\Users\Honor\Desktop\прога ВЫШКА\лабораторка 5-6\laba56\laba56\bin\Debug\net8.0\laba56.runtimeconfig.json
+C:\Users\Honor\Desktop\прога ВЫШКА\лабораторка 5-6\laba56\laba56\bin\Debug\net8.0\laba56.dll
+C:\Users\Honor\Desktop\прога ВЫШКА\лабораторка 5-6\laba56\laba56\bin\Debug\net8.0\laba56.pdb
+C:\Users\Honor\Desktop\прога ВЫШКА\лабораторка 5-6\laba56\laba56\obj\Debug\net8.0\laba56.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Honor\Desktop\прога ВЫШКА\лабораторка 5-6\laba56\laba56\obj\Debug\net8.0\laba56.AssemblyInfoInputs.cache
+C:\Users\Honor\Desktop\прога ВЫШКА\лабораторка 5-6\laba56\laba56\obj\Debug\net8.0\laba56.AssemblyInfo.cs
+C:\Users\Honor\Desktop\прога ВЫШКА\лабораторка 5-6\laba56\laba56\obj\Debug\net8.0\laba56.csproj.CoreCompileInputs.cache
+C:\Users\Honor\Desktop\прога ВЫШКА\лабораторка 5-6\laba56\laba56\obj\Debug\net8.0\laba56.dll
+C:\Users\Honor\Desktop\прога ВЫШКА\лабораторка 5-6\laba56\laba56\obj\Debug\net8.0\refint\laba56.dll
+C:\Users\Honor\Desktop\прога ВЫШКА\лабораторка 5-6\laba56\laba56\obj\Debug\net8.0\laba56.pdb
+C:\Users\Honor\Desktop\прога ВЫШКА\лабораторка 5-6\laba56\laba56\obj\Debug\net8.0\laba56.genruntimeconfig.cache
+C:\Users\Honor\Desktop\прога ВЫШКА\лабораторка 5-6\laba56\laba56\obj\Debug\net8.0\ref\laba56.dll
