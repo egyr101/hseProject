@@ -8,6 +8,7 @@ namespace laba56
 {
     public class CustomErrors
     {
+        // Ошибки, которые могут вывестись пользователю по ходу программы
         public const string errorMessageInputNumberTask = "Нет задачи с таким номером";
 
         public const string errorArrayIsEmpty = "Рваный массив пустой! Создайте новый массив";
@@ -26,3 +27,4 @@ namespace laba56
         public const string errorMessageStringHasOneWord = "Операция невозможна, так как в строке только одно слово!";
     }
 }
+
