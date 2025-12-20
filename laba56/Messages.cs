@@ -8,6 +8,7 @@ namespace laba56
 {
     public class Messages
     {
+        // Сообщения, которые могут выводится пользователю в ходе программы
         static public string[] menuOfFillArray = { "Заполнить массив с помощью ручного ввода", "Заполнить массив с помощью ДСЧ" };
         static public string[] menuOfFillRow = { "Заполнить строку с помощью ручного ввода", "Заполнить строку с помощью ДСЧ" };
         static public string[] menuOfTasksDouble = { "Создать двумерный массив", "Вывести двумерный массив", "Добавить строку в начало двумерного массива", "Выход" };
@@ -28,6 +29,7 @@ namespace laba56
 
         public const string messageInputString = "Введите строку (в строке не должно быть двух или нескольких подряд стоящих знаков препинания(исключения - !?, ?!)): ";
 
+        // Вывод менюшки
         static public void PrintMenu(Menu menu)
         {
 
@@ -37,6 +39,7 @@ namespace laba56
             }
         }
 
+        // Вывод многомерного массива
         static public void PrintArray(DoubleArray doubleArray)
         {
             int[,] array = doubleArray.GetTable();
@@ -51,6 +54,7 @@ namespace laba56
             }
         }
 
+        // Вывод рваного массива
         static public void PrintArray(RaggyArray raggyArray)
         {
             int[][] array = raggyArray.GetRaggyArray();
@@ -68,3 +72,4 @@ namespace laba56
         
     }
 }
+
