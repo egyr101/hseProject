@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace laba56
 {
+    // Класс отвечающий за работу с многомерными массивами
     public class DoubleArray
     {
         Random rnd = new Random();
-
+        // Поля класса
         private int quantityRows;
         private int quantityColumns;
 
         private int[,] table;
-        
+
+        // Конструктор класса, многомерный массив остается пустым после создания объекта класса
         public DoubleArray(int quantityRows, int quantityColumns)
         {
             this.quantityRows = quantityRows;
@@ -22,11 +24,13 @@ namespace laba56
             table = new int[quantityRows, quantityColumns];
         }
 
+        // Заполнение вручную
         private void FillInput(int[,] table)
         {
             this.table = table;
         }
 
+        // Заполнение с помощью ДСЧ
         private void FillByRandom()
         {
             for (int r = 0; r < quantityRows; r++)
@@ -38,6 +42,7 @@ namespace laba56
             }
         }
 
+        // Выбор способа заполнения
         public void Fill(int numberTask, int[,]? table)
         {
             
@@ -52,20 +57,27 @@ namespace laba56
             }
         }
 
+        // Методы, которые возвращают поля, напрямую к полям класса из других классов обращаться нельзя
+        
+        // Получение количества строк
         public int GetQuantityRows()
         {
             return quantityRows;
         }
 
+        // Получение количества столбцов 
         public int GetQuantityColumns()
         {
             return quantityColumns;
         }
+
+        // Получение многомерного массива
         public int[,] GetTable()
         {
             return table;
         }
 
+        // Добавление строки с начала многомерного массива вручную
         private void AddRowToBeginInput(int[] row)
         {
             int[,] newTable = new int[quantityRows + 1, quantityColumns];
@@ -78,6 +90,7 @@ namespace laba56
             Update(newTable);
         }
 
+        // Добавление строки с начала многомерного массива с помощью ДСЧ
         private void AddRowToBeginByRandom()
         {
             int[,] newTable = new int[quantityRows + 1, quantityColumns];
@@ -90,6 +103,8 @@ namespace laba56
             Update(newTable);
             
         }
+
+         // Выбор способа добавления строки
         public void AddRowToBegin(int numberOfTask, int[]? row)
         {
             
@@ -104,6 +119,7 @@ namespace laba56
             }
         }
 
+        // Дозаполнение обновленного многомерного массива, элементами из старого массива
         private void Update(int[,] newTable)
         {
             quantityRows += 1;
@@ -120,3 +136,4 @@ namespace laba56
         }
     }
 }
+
