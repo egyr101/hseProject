@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace laba56
 {
+    // Класс для работы с рваным массивом
     public class RaggyArray
     {
         Random rnd = new Random();
 
+        // Поля класса
         private int quantityRows;
 
         private int[][] raggyArray;
 
+        // Конструктор не заполняет рваный массив
         public RaggyArray(int quantityRows, int[] listLengthRows)
         {
             this.quantityRows = quantityRows;
@@ -25,11 +24,13 @@ namespace laba56
             }
         }
 
+        // Заполнение массива вручную
         public void FillInput(int[][] raggyArray)
         {
             this.raggyArray = raggyArray;
         }
 
+        // Заполнение массива с помощью ДСЧ
         public void FillByRandom()
         {
             for (int r = 0; r < quantityRows; r++)
@@ -41,6 +42,7 @@ namespace laba56
             }
         }
 
+        // Выбор способа заполнения массива
         public void Fill(int numberTask, int[][]? raggy)
         {
 
@@ -55,16 +57,19 @@ namespace laba56
             }
         }
 
+        // Возвращает рваный массив
         public int[][] GetRaggyArray()
         {
             return raggyArray;
         }
 
+        // Возвращает количество строк в рваном массиве
         public int GetQuantityRows()
         {
             return quantityRows;
         }
 
+        // Удаление K строк, начиная со строки элементов N
         public bool DeleteKRowsFromN(int n, int k)
         {
             if (IsEmpty())
@@ -94,9 +99,11 @@ namespace laba56
             return true;
         }
 
+        // Проверка на пустоту рваного массива
         public bool IsEmpty()
         {
             return quantityRows == 0;
         }
     }
 }
+
