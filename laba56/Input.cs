@@ -10,6 +10,7 @@ namespace laba56
 {
     public class Input
     {
+        // Ввод + проверка числа типа int
         static public int Int(string message)
         {
             bool isCorrectInput = false;
@@ -31,6 +32,7 @@ namespace laba56
             return 0;
         }
 
+        // Ввод + проверка номера строки N для задачи с рваным массивом
         static public int Int(string message, int lengthArray)
         {
             bool isCorrectInput = false;
@@ -54,6 +56,7 @@ namespace laba56
             return 0;
         }
 
+        // Ввод + проверка количества строк N для задачи с рваным массивом
         static public int Int(string message, int lengthArray, int n)
         {
             bool isCorrectInput = false;
@@ -77,6 +80,7 @@ namespace laba56
             return 0;
         }
 
+        // Ввод + проверка длины массива или номера задачи
         static public int NaturalNumber(string message, string messageError, int? maxNumber)
         {
             bool isCorrectInput = false;
@@ -99,6 +103,7 @@ namespace laba56
             return 0;
         }
 
+        //Ввод + проверка многомерного массива
         static public int[,] DoubleArray(int quantityRows, int quantityColumns)
         {
             int[,] doubleArray = new int[quantityRows, quantityColumns];
@@ -113,19 +118,21 @@ namespace laba56
 
             return doubleArray;
         }
-        
+
+        //Ввод + проверка строки элементов в рваном массиве, но подходит также под массив
         static public int[] Array(int length)
         {
             int[] array = new int[length];
 
             for(int i = 0; i < array.Length; i++)
             {
-                array[i] = Int(Messages.messageInputElemDoubleArray);
+                array[i] = Int(Messages.messageInputElemRaggyArray);
             }
 
             return array;
         }
 
+        //Ввод + проверка массива длин строк элементов рваного массива
         static public int[] ArrayLengths(int length)
         {
             int[] array = new int[length];
@@ -138,6 +145,7 @@ namespace laba56
             return array;
         }
 
+        // Ввод + проверка строки
         static public string InputString()
         {
             Regex regex = new Regex(@"[?.,!\-;:]+");
@@ -173,3 +181,4 @@ namespace laba56
         }
     }
 }
+
