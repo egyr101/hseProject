@@ -1,9 +1,11 @@
-﻿namespace laba56
+using System;
+namespace laba56
 {
     public class Program
     {
         static void Main(string[] args)
         {
+            // Работа с многомерными массивами
             DoubleArray table = new DoubleArray(Input.NaturalNumber(Messages.messageInputQuantityRowsDouble, CustomErrors.errorMessageInputQuantityRowsDouble, null), Input.NaturalNumber(Messages.messageInputQuantityColumnsDouble, CustomErrors.errorMessageInputQuantityColumnsDouble, null));
             Messages.PrintMenu(Menu.menuOfFillArray);
             int numberOfMethod = Input.NaturalNumber(Messages.messageInputNumberTask, CustomErrors.errorMessageInputNumberTask, Menu.menuOfFillArray.GetQuantityOfTasks());
@@ -16,13 +18,14 @@
                 table.Fill(numberOfMethod, Input.DoubleArray(table.GetQuantityRows(), table.GetQuantityColumns()));
             }
 
+            // Цикл менюшки с задачами с многомерным массивом
             bool isExited = false;
             while (!isExited)
             {
                 Messages.PrintMenu(Menu.menuOfTasksDouble);
 
                 int numberOftask = Input.NaturalNumber(Messages.messageInputNumberTask, CustomErrors.errorMessageInputNumberTask, Menu.menuOfTasksDouble.GetQuantityOfTasks());
-
+            
                 switch (numberOftask)
                 {
                     case 1:
@@ -54,8 +57,9 @@
                 }
             }
 
+            // Работа с рваными массивами
             isExited = false;
-
+            
             int quantityRows = Input.NaturalNumber(Messages.messageInputQuantityRowsRaggy, CustomErrors.errorMessageInputQuantityRowsRaggy, null);
             int[] listLengthRows = Input.ArrayLengths(quantityRows);
             RaggyArray raggy = new RaggyArray(quantityRows, listLengthRows);
@@ -77,6 +81,7 @@
                 raggy.Fill(numberOfMethod, tmpRaggy);
             }
 
+            // Цикл менюшки с задачами с рваным массивом
             while (!isExited)
             {
                 Messages.PrintMenu(Menu.menuOfTasksRaggy);
@@ -126,8 +131,10 @@
             }
             isExited = false;
 
+            // Работа со строками
             TaskOfStrings stringOfUser = new TaskOfStrings(Input.InputString());
 
+            // Цикл менюшки с задачами со строками
             while (!isExited) 
             {
                 Messages.PrintMenu(Menu.menuOfTasksString);
@@ -157,3 +164,4 @@
         }
     }
 }
+
